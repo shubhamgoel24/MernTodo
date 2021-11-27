@@ -1,0 +1,103 @@
+body{
+    margin: 0;
+    background-color: black;
+    color: white;
+    font-size: 2vh;
+}
+h1{
+    text-align: center;
+    font-size: 5vh;
+}
+h4{
+    font-size: 2vh;
+}
+.container{
+    max-width: none;
+    width: 95vw;
+}
+#description{
+    border-top:1px grey solid ;
+    padding: 1%;
+}
+#category{
+    border-top:1px grey solid ;
+    border-bottom:1px grey solid;
+    padding: 1%;
+
+}
+#date{
+    border: 1px grey solid;
+    border-right: 0;
+    padding: 1%;
+
+}
+
+input , select{
+    background-color: black;
+    color: #888;
+    padding: 1%;
+    border: none;
+}
+::-webkit-calendar-picker-indicator {
+    filter: invert(1);
+}
+
+button{
+    margin: 2%;
+    height: 4vh;
+    font-size: 2vh;
+}
+.button_row{
+    padding-top: 1%;
+}
+#add{
+    background-color: gray;
+    color: white;
+}
+#add:hover{
+    background-color: rgb(100, 100, 100);
+}
+#del{
+    background-color: red;
+}
+#del:hover{
+    background-color: rgb(209, 21, 21);
+}
+
+
+.task_list{
+    width: 90vw;
+    max-height: 48vh;
+    overflow-y: auto;
+}
+.item{
+    border-top:1px grey solid ;
+    padding: 1%;
+}
+.listitem{
+    height: 25px;
+}
+
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 25px;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 25px;
+    height: 10px;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
