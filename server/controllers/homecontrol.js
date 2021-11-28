@@ -1,4 +1,3 @@
-const { model } = require('mongoose');
 const Task = require('../models/task');
 module.exports.home = function(req,res){
     Task.find({} , function(err, tasks){
@@ -6,10 +5,9 @@ module.exports.home = function(req,res){
             console.log("Error in fetching contacts");
             return;
         }
-
-        return res.render('home',{
-            title : 'ToDo List App',
-            task : tasks
+        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+        return res.status(200).json({
+            task:tasks
         });
     });
 };

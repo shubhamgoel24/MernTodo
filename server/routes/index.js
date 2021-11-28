@@ -3,7 +3,7 @@ const router = express.Router();
 const homecontrol = require('../controllers/homecontrol');
 
 console.log("Router Loaded");
-router.get('/',homecontrol.home);
+router.get('/data',homecontrol.home);
 router.post('/create-task',homecontrol.create_task);
 router.get('/delete-task',homecontrol.delete_task);
 
