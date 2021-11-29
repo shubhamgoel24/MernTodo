@@ -1,5 +1,6 @@
 const Task = require('../models/task');
 module.exports.home = function(req,res){
+    console.log("request");
     Task.find({} , function(err, tasks){
         if(err){
             console.log("Error in fetching contacts");
