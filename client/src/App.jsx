@@ -29,7 +29,14 @@ class App extends React.Component {
     }
 
     async componentDidMount(){
-        const data = await axios.get('http://20.124.0.193:8005/data');
+        const data = await axios('http://20.124.0.193:8005/data', {
+            method: 'GET',
+            headers: {
+              'Access-Control-Allow-Origin': 'http://20.124.0.193:8005'
+            },
+            withCredentials: true,
+            credentials: 'same-origin',
+        });
         this.setState({ 
             list : data.data.task,
             loading:false
