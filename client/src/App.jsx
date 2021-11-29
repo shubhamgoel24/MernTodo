@@ -38,89 +38,88 @@ class App extends React.Component {
 
     datelim = () => {
         var dtToday = new Date();
-    
         var month = dtToday.getMonth() + 1;
         var day = dtToday.getDate();
         var year = dtToday.getFullYear();
-    
         if(month < 10)
             month = '0' + month.toString();
         if(day < 10)
             day = '0' + day.toString();
-    
         var maxDate = year + '-' + month + '-' + day;    
         $('#date-input').attr('min', maxDate);
     }
 
-    createTask = () => {
+    createTask = async (event) => {
+        event.preventDefault();
         let newTaskForm = $('#new-task-form');
-        newTaskForm.submit(function(e){
-            e.preventDefault();
-            $.ajax({
-                type: 'post',
-                url: '/create-Task',
-                data: newTaskForm.serialize(),
-                success: function(data){
-                    let newTask = newTaskDom(data.data.task);
-                    $('#tasks-list-container').append(newTask);
-    
-                    new Noty({
-                        theme: 'relax',
-                        text: data.message,
-                        type: 'success',
-                        layout: 'topRight',
-                        timeout: 1500
-                        
-                    }).show();
-    
-                }, error: function(error){
-                    console.log(error.responseText);
-                }
-            });
+        await axios({
+            method: 'post',
+            url: 'http://localhost:8005/create-Task',
+            data: newTaskForm.serialize(),
+        })
+        .then((response) => {
+            if(response.status === 200){
+                let newTask = newTaskDom(response.data.data.task);
+                $('#tasks-list-container').append(newTask);
+                new Noty({
+                    theme: 'relax',
+                    text: response.data.message,
+                    type: 'success',
+                    layout: 'topRight',
+                    timeout: 1500
+                }).show();
+            }
         });
     }
     
 
-    delfunc = () => {
+    delfunc = async() => {
         var listitems=$("input:checked");
         var delarry = [];
+        if(listitems.length === 0){
+            new Noty({
+                theme: 'relax',
+                text: 'Select Something to Delete',
+                type: 'error',
+                layout: 'topRight',
+                timeout: 1500
+            }).show();
+            return;
+        }
         $.each(listitems,function(i,x){
             delarry.push(x.id);
         });
         var arrStr = encodeURIComponent(JSON.stringify(delarry));
-        $.ajax({
-            type: 'get',
-            url: '/delete-task/?id=' + arrStr,
-            success: function(data){
+        await axios({
+            method: 'get',
+            url: 'http://localhost:8005/delete-task/?id=' + arrStr
+        })
+        .then((response) => {
+            if(response.status === 200){
                 $.each(delarry,function(i,x){
                     let y = $('#tasks-list-container').find(`#${x}`);
                     y.remove();
                 });
                 new Noty({
                     theme: 'relax',
-                    text: data.message,
+                    text: response.data.message,
                     type: 'success',
                     layout: 'topRight',
                     timeout: 1500
-                    
                 }).show();
-
-            }, error: function(error){
-                console.log(error.responseText);
             }
         });
     }
     
     render(){
         const {list,loading} = this.state;
-        
         return (
             <div className="App">
               <div className="container">
                     <div className="row">
                         <h1>ToDo List App</h1>
                     </div>
-                    <form action="../../create-Task" id="new-task-form" method="POST">
+                    <form id="new-task-form" onSubmit={this.createTask}>
                         <div className="row">
                             <div id="description">
                                 <h4>Description</h4>
@@ -147,13 +146,9 @@ class App extends React.Component {
                         </div>
                         <div className= "row d-flex justify-content-center button_row">
                             <button id="del" className=" col-5 col-sm-4 col-md-3 col-lg-2" type="button" onClick={this.delfunc}><i className="fas fa-trash"></i> Delete</button>
-                            <button id="add" className=" col-5 col-sm-4 col-md-3 col-lg-2" type="submit" onClick={this.createTask}><i className="fas fa-plus"></i> Add</button>
+                            <button id="add" className=" col-5 col-sm-4 col-md-3 col-lg-2" type="submit"><i className="fas fa-plus"></i> Add</button>
                         </div>
                     </form>
-                    
-                    
-        
-                    
         
                     <div>
                         <ul className="container task_list" id="tasks-list-container">

@@ -19,15 +19,14 @@ module.exports.create_task= async function(req,res){
             date: req.body.date,
             category: req.body.category
         });
-    
-        if(req.xhr){
-            return res.status(200).json({
-                data: {
-                    task : task
-                },
-                message: "Task Created!"
-            }); 
-        }
+        
+        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+        return res.status(200).json({
+            data: {
+                task : task
+            },
+            message: "Task Created!"
+        });
     }catch(err){
         console.log("Error in creating task" + err);
         return;
@@ -47,6 +46,7 @@ module.exports.delete_task=function(req,res){
                 }
             });
         });
+        res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
         return res.status(200).json({
             message: "Tasks Deleted Sucessfully !"
         });
