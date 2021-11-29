@@ -29,14 +29,7 @@ class App extends React.Component {
     }
 
     async componentDidMount(){
-        const data = await axios('http://20.124.0.193:8005/data', {
-            method: 'GET',
-            headers: {
-              'Access-Control-Allow-Origin': 'http://20.124.0.193:8005'
-            },
-            withCredentials: true,
-            credentials: 'same-origin',
-        });
+        const data = await axios.get('https://shubhamgoel.tech/data');
         this.setState({ 
             list : data.data.task,
             loading:false
@@ -61,7 +54,7 @@ class App extends React.Component {
         let newTaskForm = $('#new-task-form');
         await axios({
             method: 'post',
-            url: 'http://20.124.0.193:8005/create-Task',
+            url: 'https://shubhamgoel.tech/create-Task',
             data: newTaskForm.serialize(),
         })
         .then((response) => {
@@ -99,7 +92,7 @@ class App extends React.Component {
         var arrStr = encodeURIComponent(JSON.stringify(delarry));
         await axios({
             method: 'get',
-            url: 'http://20.124.0.193:8005/delete-task/?id=' + arrStr
+            url: 'https://shubhamgoel.tech/delete-task/?id=' + arrStr
         })
         .then((response) => {
             if(response.status === 200){
