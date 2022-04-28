@@ -29,7 +29,7 @@ class App extends React.Component {
     }
 
     async componentDidMount(){
-        const data = await axios.get('https://shubhamgoel.tech/data');
+        const data = await axios.get('https://todo.shubhamgoel.tech/data');
         this.setState({ 
             list : data.data.task,
             loading:false
@@ -54,7 +54,7 @@ class App extends React.Component {
         let newTaskForm = $('#new-task-form');
         await axios({
             method: 'post',
-            url: 'https://shubhamgoel.tech/create-Task',
+            url: 'https://todo.shubhamgoel.tech/create-Task',
             data: newTaskForm.serialize(),
         })
         .then((response) => {
@@ -92,7 +92,7 @@ class App extends React.Component {
         var arrStr = encodeURIComponent(JSON.stringify(delarry));
         await axios({
             method: 'get',
-            url: 'https://shubhamgoel.tech/delete-task/?id=' + arrStr
+            url: 'https://todo.shubhamgoel.tech/delete-task/?id=' + arrStr
         })
         .then((response) => {
             if(response.status === 200){
