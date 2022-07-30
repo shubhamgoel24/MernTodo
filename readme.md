@@ -2,7 +2,7 @@ TODO List App
 
 Made for Future Ready Talent Internship
 This app is Based on MERN Stack and is hosted on Azure Virtual Machine.
-Link for hosted website is https://todo.shubhamgoel.tech/
+Link for hosted website is https://todo.shubhamgoel24.me/
 
 Below are the screenshots of Azure Portal where the website is hosted.
 To verify wether the website is hosted on Azure, the public ip address of Azure VM can be typed in a browser which will redirect us directly to the above mentioned website url.

@@ -6,7 +6,7 @@ module.exports.home = function(req,res){
             console.log("Error in fetching contacts");
             return;
         }
-        res.setHeader('Access-Control-Allow-Origin', 'https://todo.shubhamgoel.tech');
+        res.setHeader('Access-Control-Allow-Origin', 'https://todo.shubhamgoel24.me');
         return res.status(200).json({
             task:tasks
         });
@@ -21,7 +21,7 @@ module.exports.create_task= async function(req,res){
             category: req.body.category
         });
         
-        res.setHeader('Access-Control-Allow-Origin', 'https://todo.shubhamgoel.tech');
+        res.setHeader('Access-Control-Allow-Origin', 'https://todo.shubhamgoel24.me');
         return res.status(200).json({
             data: {
                 task : task
@@ -47,7 +47,7 @@ module.exports.delete_task=function(req,res){
                 }
             });
         });
-        res.setHeader('Access-Control-Allow-Origin', 'https://todo.shubhamgoel.tech');
+        res.setHeader('Access-Control-Allow-Origin', 'https://todo.shubhamgoel24.me');
         return res.status(200).json({
             message: "Tasks Deleted Sucessfully !"
         });
